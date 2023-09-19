@@ -4,7 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["Vlada Dusek <v.dusek96@gmail.com>"]
 readme = "README.md"
-packages = [{ include = "proj" }]
+packages = [{ include = "books_scraper" }]
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -79,7 +79,7 @@ disallow_untyped_calls = true
 disallow_untyped_decorators = true
 disallow_untyped_defs = true
 error_summary = true
-files = ["proj"]                    # Todo: add "tests"
+files = ["books_scraper"]                    # Todo: add "tests"
 ignore_missing_imports = true
 no_implicit_optional = true
 pretty = true
