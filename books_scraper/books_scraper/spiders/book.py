@@ -1,5 +1,4 @@
 from typing import Generator
-from urllib.parse import urljoin
 
 from scrapy import Spider
 from scrapy.responsetypes import Response
@@ -12,7 +11,8 @@ class BookSpider(Spider):
     name = 'book_spider'
     start_urls = ['http://books.toscrape.com/']
 
-    def parse(self, response: Response) -> Generator[BookItem, None, None]:
+    def parse(self, response: Response) -> Generator[BookItem | Response, None, None]:
+        self.logger.info(f'BookSpider is parsing {response}...')
         articles = response.css('article.product_pod')
 
         for article in articles:
@@ -23,6 +23,6 @@ class BookSpider(Spider):
                 in_stock=article.css('.instock.availability::text').getall()[1].strip(),
             )
 
-        # next_page_link = response.css('li.next a::attr(href)').extract_first()
-        # if next_page_link:
-        #     yield response.follow(next_page_link)
+        next_page_link = response.css('li.next a::attr(href)').extract_first()
+        if next_page_link:
+            yield response.follow(next_page_link)
