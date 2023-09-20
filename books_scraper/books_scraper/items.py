@@ -5,8 +5,11 @@
 
 import scrapy
 
+# todo: serialization
+
 
 class BookItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+    title = scrapy.Field()
+    rating = scrapy.Field()
+    price = scrapy.Field()
+    in_stock = scrapy.Field()

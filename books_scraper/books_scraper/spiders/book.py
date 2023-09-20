@@ -1,20 +1,28 @@
+from typing import Generator
 from urllib.parse import urljoin
 
-import scrapy
+from scrapy import Spider
+from scrapy.responsetypes import Response
+
+from ..items import BookItem
 
 
-class BookSpider(scrapy.Spider):
+class BookSpider(Spider):
 
     name = 'book_spider'
     start_urls = ['http://books.toscrape.com/']
 
-    def parse(self, response):
-        yield {
-            'url': response.url.strip(),
-            'title': response.css('title::text').extract_first().strip(),
-        }
+    def parse(self, response: Response) -> Generator[BookItem, None, None]:
+        articles = response.css('article.product_pod')
 
-        # for link_href in response.css('a::attr("href")'):
-        #     link_url = urljoin(response.url, link_href.get())
-        #     if link_url.startswith(('http://', 'https://')):
-        #         yield scrapy.Request(link_url)
+        for article in articles:
+            yield BookItem(
+                title=article.css('h3 > a::attr(title)').get().strip(),
+                price=article.css('.price_color::text').get().strip(),
+                rating=article.css('.star-rating::attr(class)').get().strip(),
+                in_stock=article.css('.instock.availability::text').getall()[1].strip(),
+            )
+
+        # next_page_link = response.css('li.next a::attr(href)').extract_first()
+        # if next_page_link:
+        #     yield response.follow(next_page_link)
