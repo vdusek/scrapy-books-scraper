@@ -12,7 +12,14 @@ This will install a self-contained package with all the libraries needed. You wi
 
 Create a docker container postgres
 ```
-docker run --detach --name postgres --publish 5432:5432 --env POSTGRES_PASSWORD=postgres --env POSTGRES_USER=postgres --env POSTGRES_DB=postgres postgres:16
+docker run \
+    --detach \
+    --name postgres \
+    --publish 5432:5432 \
+    --env POSTGRES_USER=postgres \
+    --env POSTGRES_PASSWORD=postgres \
+    --env POSTGRES_DB=postgres \
+    postgres:16
 ```
 
 Execute bash inside the postgres container in interactive mode
