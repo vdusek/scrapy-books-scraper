@@ -1,3 +1,6 @@
+# Scrapy Books Scraper
+
+- This project was created as part of the [Handling data in Scrapy: databases and pipelines](https://www.notion.so/apify/Handling-data-in-Scrapy-databases-and-pipelines-b57b3d7b0ee54c739b196300c116b595) blog post
 
 <!-- --publish 5050:5050
 ```
@@ -8,9 +11,10 @@ The quickest way to start developing with Psycopg 3 is to install the binary pac
 
 This will install a self-contained package with all the libraries needed. You will need pip 20.3 at least: please run pip install --upgrade pip to update it beforehand.
 
-
+## Prepare database for storing data
 
 Create a docker container postgres
+
 ```
 docker run \
     --detach \
@@ -23,21 +27,25 @@ docker run \
 ```
 
 Execute bash inside the postgres container in interactive mode
+
 ```
 docker exec --interactive --tty postgres bash
 ```
 
 Using psql command line tool connect to the databse `postgres`
+
 ```
 psql --host localhost --port 5432 --username postgres --dbname postgres
 ```
 
 List of tables
+
 ```
 \dt
 ```
 
 Create a table for books
+
 ```
 CREATE TABLE books (
     id SERIAL PRIMARY KEY,
@@ -49,6 +57,17 @@ CREATE TABLE books (
 ```
 
 Select all the rows in the table
+
 ```
 SELECT * FROM books;
+```
+
+## Run the scraper
+
+```
+cd books_scraper/
+```
+
+```
+scrapy crawl book_spider
 ```
