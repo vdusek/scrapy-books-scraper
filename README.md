@@ -2,14 +2,13 @@
 
 - This project was created as part of the [Handling data in Scrapy: databases and pipelines](https://www.notion.so/apify/Handling-data-in-Scrapy-databases-and-pipelines-b57b3d7b0ee54c739b196300c116b595) blog post
 
-<!-- --publish 5050:5050
+<!-- Todo: pg admin -->
+<!-- --publish 5050:5050 --->
+<!-- docker run --detach --name pgadmin --network host thajeztah/pgadmin4 -->
+
 ```
-docker run --detach --name pgadmin --network host thajeztah/pgadmin4
-``` -->
-
-The quickest way to start developing with Psycopg 3 is to install the binary packages by running:
-
-This will install a self-contained package with all the libraries needed. You will need pip 20.3 at least: please run pip install --upgrade pip to update it beforehand.
+poetry install
+```
 
 ## Prepare database for storing data
 
@@ -63,10 +62,6 @@ SELECT * FROM books;
 ```
 
 ## Run the scraper
-
-```
-cd books_scraper/
-```
 
 ```
 scrapy crawl book_spider
