@@ -1,26 +1,31 @@
-from typing import Generator
+from __future__ import annotations
 
-from scrapy import Spider, Request
-from scrapy.responsetypes import Response
+from typing import TYPE_CHECKING, Generator
+
+from scrapy import Request, Spider
 
 from ..items import BookItem
 
+if TYPE_CHECKING:
+    from scrapy.responsetypes import Response
+
 
 class BookSpider(Spider):
-    name = "book_spider"
+    name = 'book_spider'
+    start_urls = ['http://books.toscrape.com/']
 
     def parse(self, response: Response) -> Generator[BookItem | Request, None, None]:
-        self.logger.info(f"BookSpider is parsing {response}...")
-        articles = response.css("article.product_pod")
+        self.logger.info('BookSpider is parsing %s...', response)
+        articles = response.css('article.product_pod')
 
         for article in articles:
             yield BookItem(
-                title=article.css("h3 > a::attr(title)").get().strip(),
-                price=article.css(".price_color::text").get().strip(),
-                rating=article.css(".star-rating::attr(class)").get().strip(),
-                in_stock=article.css(".instock.availability::text").getall()[1].strip(),
+                title=article.css('h3 > a::attr(title)').get().strip(),
+                price=article.css('.price_color::text').get().strip(),
+                rating=article.css('.star-rating::attr(class)').get().strip(),
+                in_stock=article.css('.instock.availability::text').getall()[1].strip(),
             )
 
-        next_page_link = response.css("li.next a::attr(href)").extract_first()
+        next_page_link = response.css('li.next a::attr(href)').extract_first()
         if next_page_link:
             yield response.follow(next_page_link)
