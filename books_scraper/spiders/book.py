@@ -1,6 +1,6 @@
 from typing import Generator
 
-from scrapy import Spider
+from scrapy import Spider, Request
 from scrapy.responsetypes import Response
 
 from ..items import BookItem
@@ -8,9 +8,8 @@ from ..items import BookItem
 
 class BookSpider(Spider):
     name = "book_spider"
-    start_urls = ["http://books.toscrape.com/"]
 
-    def parse(self, response: Response) -> Generator[BookItem | Response, None, None]:
+    def parse(self, response: Response) -> Generator[BookItem | Request, None, None]:
         self.logger.info(f"BookSpider is parsing {response}...")
         articles = response.css("article.product_pod")
 
