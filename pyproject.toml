@@ -28,7 +28,7 @@ disallow_untyped_calls = true
 disallow_untyped_decorators = true
 disallow_untyped_defs = true
 error_summary = true
-files = ["src"]                    # Todo: add "tests"
+files = ["books_scraper"]          # Todo: add "tests"
 ignore_missing_imports = true
 no_implicit_optional = true
 pretty = true
@@ -61,7 +61,7 @@ ignore = [
     "PGH003",  # Use specific rule codes when ignoring type issues
     "PLR0913", # Too many arguments in function definition
     "PTH123",  # `open()` should be replaced by `Path.open()`
-    "S",       # 
+    "S",       #
     "TID252",  # Relative imports from parent modules are bannedRuff
     "TRY003",  # Avoid specifying long messages outside the exception class
 ]

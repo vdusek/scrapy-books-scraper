@@ -1,4 +1,5 @@
 BOT_NAME = 'books_scraper'
+LOG_LEVEL = 'INFO'
 
 SPIDER_MODULES = ['books_scraper.spiders']
 NEWSPIDER_MODULE = 'books_scraper.spiders'
