@@ -1,8 +1,8 @@
-BOT_NAME = 'books_scraper'
+BOT_NAME = 'booksscraper'
 LOG_LEVEL = 'INFO'
 
-SPIDER_MODULES = ['books_scraper.spiders']
-NEWSPIDER_MODULE = 'books_scraper.spiders'
+SPIDER_MODULES = ['booksscraper.spiders']
+NEWSPIDER_MODULE = 'booksscraper.spiders'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -13,6 +13,6 @@ TWISTED_REACTOR = 'twisted.internet.asyncioreactor.AsyncioSelectorReactor'
 FEED_EXPORT_ENCODING = 'utf-8'
 
 ITEM_PIPELINES = {
-    'books_scraper.pipelines.cleaning.CleaningPipeline': 100,
-    'books_scraper.pipelines.storing.StoringPipeline': 200,
+    'booksscraper.pipelines.cleaning.CleaningPipeline': 100,
+    # 'booksscraper.pipelines.storing.StoringPipeline': 200,
 }
